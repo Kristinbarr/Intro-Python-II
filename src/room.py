@@ -2,9 +2,10 @@
 # description attributes.
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, items):
         self.name = name
         self.description = description
+        self.items = items
         self.n_to = None
         self.s_to = None
         self.e_to = None
@@ -12,7 +13,6 @@ class Room:
 
     def __str__(self):
         return f"{self.name}\n{self.description}"
-        # return "Current location: %s %s" % (self.name, self.description)
 
     def get_next_room(self, direction):
         if direction == "n":
@@ -25,3 +25,8 @@ class Room:
             return self.w_to
         else:
             return None
+    def withdraw_item(self, item):
+        self.items.remove(item)
+
+    def deposit_item(self, item):
+        self.items.append(item)
