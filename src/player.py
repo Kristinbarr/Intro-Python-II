@@ -2,13 +2,16 @@
 # currently.
 
 class Player:
-    def __init__(self, name, cur_room, direction):
+    def __init__(self, name, starting_room):
         self.name = name
-        self.cur_room = cur_room
-        self.direction = direction
+        self.cur_room = starting_room
 
-    def printRoom(self):
-        return f'You are currently located: {self.cur_room}'
-
-    def move(self, new_room):
-        self.cur_room = new_room
+    def move(self, direction):
+        # player can move in a direction
+        next_room = self.cur_room.get_room_in_direction(direction)
+        # new room has to be defined
+        if next_room is not None:
+            self.cur_room = next_room
+            print(self.cur_room)
+        else:
+            print('You cannot move in that direction')

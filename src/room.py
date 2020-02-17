@@ -2,13 +2,25 @@
 # description attributes.
 
 class Room:
-    def __init__(self, title, description):
+    def __init__(self, title, description, items):
         self.title = title
         self.description = description
+        self.items = items
+        
+        # explicitely initiate directions to None
         self.n_to = None
         self.s_to = None 
         self.e_to = None
         self.w_to = None
-    def printRoomDesc(self):
-        print(f'Current room: {self.title}, {self.description}')
+    def __str__(self):
+        return f'Current room:\n{self.title}\n{self.description}'
 
+    def get_room_in_direction(self, direction):
+        if direction == "n":
+            return self.n_to
+        elif direction == "s":
+            return self.s_to
+        elif direction == "e":
+            return self.e_to
+        elif direction == "w":
+            return self.w_to

@@ -48,31 +48,38 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
     
-player1 = Player('Joe', room['outside'], 'n')
+player1 = Player('Joe', room['outside'])
 print()
 print("======= Welcome to the Dungeon =======")
 print()
 # playerName = input('What is your name? ')
 # print(f'welcome {playerName}')
-# print(player1.printRoom())
-cmd = input("Press [n][s][e][w] to move through rooms, [q] to quit.")
+print(player1.cur_room)
+print()
+print("Enter [n][s][e][w] to move through rooms, [q] to quit.\n")
 
 while True:
-    print(player1.cur_room)
+    print()
     cmd = input('--> ').lower()
 
     if cmd in ['n','s','e','w']:
-        current_room = player1.cur_room
-        next_room = getattr(current_room, f"{cmd}_to")
+        # saves the new room but checking the attribute
+        # also dynamically grabs the user direction input cmd
+        next_room = getattr(player1.cur_room, f"{cmd}_to")
 
-        if next_room is not None:
+        player1.move(cmd)
+
+        # logic below has been moved to player class
+        # if next_room is not None:
             # move player by setting new cur room
-            player1.cur_room = player1.cur_room.n_to
-        else:
-            print("You cannot move in that direction.")
+        #     player1.cur_room = player1.cur_room.n_to
+        # else:
+        #     print("You cannot move in that direction.")
 
     elif cmd == 'q':
+        print()
         print('Goodbye!')
+        print()
         exit()
     else:
         print('Not a valid command, try again! [n][s][e][w] or [q]')
